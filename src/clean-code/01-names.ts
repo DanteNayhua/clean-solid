@@ -37,10 +37,10 @@
     const dir = 33;
     
     // primer nombre - first name
-    const nombre = 'Fernando';
+    const nombre = 'Dante';
     
     // primer apellido - last name
-    const apellido = 'Herrera';
+    const apellido = 'Nayhua';
 
     // días desde la última modificación - days since modification
     const dsm = 12;
