@@ -1,79 +1,61 @@
 (() => {
 
-
-    // Resolver sin la triple condicional dentro del if
-    // includes? arrays? dante
+    // 1. Resolver usando un Array e .includes()
     function isRedFruit( fruit: string ): boolean {
-        
-        if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
-            return true;
-        } else {
-            return false;
-        }
+        const redFruits = ['manzana', 'cereza', 'ciruela'];
+        return redFruits.includes(fruit);
     }
 
-    // Simplificar esta función
-    // switch? Object literal? validar posibles colores
-    function getFruitsByColor( color: string ): string[] {
+    // 2. Simplificar usando un Objeto Literal (Mapeo de tipos)
+    // Definimos un tipo estricto para las llaves aceptadas
+    type FruitColor = 'red' | 'yellow' | 'purple';
 
-        if ( color === 'red' ) {
-            return ['manzana','fresa'];
-        } else if ( color === 'yellow') {
-            return ['piña','banana'];
-        } else if ( color === 'purple') {
-            return ['moras','uvas']
-        } else {
+    function getFruitsByColor( color: string ): string[] {
+        const fruitsByColor: Record<FruitColor, string[]> = {
+            red:    ['manzana', 'fresa'],
+            yellow: ['piña', 'banana'],
+            purple: ['moras', 'uvas']
+        };
+
+        // Si el color no existe en nuestras llaves del objeto, disparamos el error
+        if ( !Object.keys(fruitsByColor).includes(color) ) {
             throw Error('the color must be: red, yellow, purple');
         }
+
+        return fruitsByColor[color as FruitColor];
     }
 
-    // Simplificar esta función
+    // 3. Simplificar usando Cláusulas de Guarda (Invertir los IFs)
     let isFirstStepWorking  = true;
     let isSecondStepWorking = true;
     let isThirdStepWorking  = true;
     let isFourthStepWorking = true;
 
-    function workingSteps() {
-        if( isFirstStepWorking === true ) {
-            if( isSecondStepWorking === true ) {
-                if( isThirdStepWorking === true ) {
-                    if( isFourthStepWorking === true ) {
-                        return 'Working properly!';
-                    }
-                    else {
-                        return 'Fourth step broken.';
-                    }
-                }
-                else {
-                    return 'Third step broken.';
-                }
-            }
-            else {
-                return 'Second step broken.';
-            }
-        }
-        else {
-            return 'First step broken.';
-        }
+    function workingSteps(): string {
+        if ( !isFirstStepWorking )  return 'First step broken.';
+        if ( !isSecondStepWorking ) return 'Second step broken.';
+        if ( !isThirdStepWorking )  return 'Third step broken.';
+        if ( !isFourthStepWorking ) return 'Fourth step broken.';
+        
+        return 'Working properly!';
     }
 
 
+    // --- PRUEBAS ---
     // isRedFruit
     console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
-    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
+    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' });     // false
 
-    //getFruitsByColor
-    console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
+    // getFruitsByColor
+    console.log({ redFruits: getFruitsByColor('red') });       // ['manzana', 'fresa']
     console.log({ yellowFruits: getFruitsByColor('yellow') }); // ['piña', 'banana']
     console.log({ purpleFruits: getFruitsByColor('purple') }); // ['moras', 'uvas']
-    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
+    // console.log({ pinkFruits: getFruitsByColor('pink') });  // Lanza el error correctamente
 
     // workingSteps
-    console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
-
+    console.log({ workingSteps: workingSteps() }); // "Working properly!"
 
 })();
-
 
 
 
