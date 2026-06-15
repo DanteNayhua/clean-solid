@@ -2,7 +2,7 @@
 
 
     // Resolver sin la triple condicional dentro del if
-    // includes? arrays?
+    // includes? arrays? dante
     function isRedFruit( fruit: string ): boolean {
         
         if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
