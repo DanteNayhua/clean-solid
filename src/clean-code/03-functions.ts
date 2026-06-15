@@ -1,48 +1,69 @@
 (() => {
-
-    // función para obtener información de una película por Id
-    function getAllMovies( movieId: string ) {
-        console.log({ movieId });
+    // 1. ESTRUCTURAS DE DATOS (Interfaces)
+    interface Movie {
+        title: string;
+        description: string;
+        rating: number;
+        cast: string[];
     }
 
-    // función para obtener información de los actores de una película - Actors o Cast // id = movieId getMovieCast
-    function getAllMovieActors( id: string ) {
+    interface Actor {
+        fullName: string;
+        birthdate: Date;
+    }
+
+    // 2. FUNCIONES DE CONSULTA (GETTERS)
+    
+    // Obtiene una película específica por su ID
+    function getMovieById(id: string): void {
         console.log({ id });
     }
 
-    // funcion para obtener el bio del actor por el id
-    function getUsuario( ActorId: string ) {
-        console.log({ ActorId });
+    // Obtiene el elenco (actores) de una película específica
+    function getMovieCastById(movieId: string): void {
+        console.log({ movieId });
+    }
+
+    // Obtiene la biografía de un actor por su ID
+    function getActorBioById(actorId: string): void {
+        console.log({ actorId });
     }
     
-    // Crear una película
-    
-interface Movie {
-    title: string;
-    description: string;
-    rating: number;
-    cast: string[];
-}
+    // 3. FUNCIONES DE CREACIÓN (POST)
 
-function createMovie({title, description, rating, cast}: Movie) {
-    console.log({title, description, rating, cast});
-}
+    // Crea una nueva película utilizando la interfaz Movie
+    function createMovie(movie: Movie): void {
+        console.log({ movie });
+    }
 
-    // Crea un nuevo actor
-    function createActorIfActorNotExists( fullName: string, birthdate: Date ): boolean {
-        
-        // tarea asincrona para verificar nombre
-        // ..
-        // ..
-        if ( fullName === 'fernando' ) return false;
+    // Crea un actor si este no existe previamente
+    function createActor({ fullName, birthdate }: Actor): boolean {
+        // Simulación de tarea asíncrona para verificar nombre
+        if (fullName.toLowerCase() === 'fernando') {
+            return false;
+        }
 
-        console.log('Crear actor');
+        console.log('Crear actor:', { fullName, birthdate });
         return true;        
-
     }
-
-    
-
+     const getPayAmount = ({ isDead = false, isSeparated = true, isRetired = false }) => {
+        let result;
+        if ( isDead ) {
+            result = 1500;
+        } else {
+            if ( isSeparated ) {
+                result = 2500;
+            } else {
+                if ( isRetired ) {
+                    result = 3000;
+                } else {
+                    result = 4000; 
+                }
+            }
+        }
+        
+        return result;
+    }
 
 })();
 
